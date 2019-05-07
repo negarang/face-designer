@@ -1,0 +1,31 @@
+{
+  "name": "negarang/face-designer",
+  "description": "A Simple Library that Provides Collection of Tools to Create a Graphical Face.",
+  "type": "library",
+  "keywords": ["graphics", "face", "designer", "avatar", "cartoon"],
+  "homepage": "http://negarang.milad-ab.ir/face-designer",
+  "support": {
+    "source": "https://github.com/milad-ab/face-designer"
+  },
+  "license": "MIT",
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "authors": [
+    {
+      "name": "Milad Abdollahnia",
+      "email": "milad_abdollahnia@yahoo.com",
+      "homepage": "http://milad-ab.ir",
+      "role": "Developer"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Negarang\\FaceDesigner\\": "src/FaceDesigner"
+    }
+  },
+  "require": {
+    "php": "^5.6 || ^7.0",
+    "ext-gd": "*",
+    "negarang/graphics-utils": "^1.0"
+  }
+}
