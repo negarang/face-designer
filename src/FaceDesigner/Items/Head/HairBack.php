@@ -27,11 +27,6 @@ class HairBack extends HeadHairItem {
     /**
      * @var int
      */
-    static protected $minId = 1;
-
-    /**
-     * @var int
-     */
     static protected $minId = self::ID_RST_ITEM;
 
     /**
