@@ -28,10 +28,18 @@ use Negarang\GraphicsUtils\Designer;
  */
 class FaceDesigner extends Designer {
 
-    const IMAGE_WIDTH = 180;
-    const IMAGE_HEIGHT = 187;
     const IMAGE_DEFAULT_FORMAT = "image/gif";
     const IMAGE_DEFAULT_EXTENSION ="gif";
+
+    /**
+     * @var int Default Image Width.
+     */
+    static private $imageWidth = 256;
+
+    /**
+     * @var int Default Image Height.
+     */
+    static private $imageHeight = 256;
 
     /**
      * @var Head
@@ -66,9 +74,17 @@ class FaceDesigner extends Designer {
     /**
      * FaceDesigner constructor.
      * @param string $graphicsDirectory
+     * @param int $imageWidth
+     * @param int $imageHeight
      */
-    public function __construct($graphicsDirectory) {
+    public function __construct($graphicsDirectory, $imageWidth=0, $imageHeight=0) {
         Item::setGraphicsDirectory($graphicsDirectory);
+        if ($imageWidth > 0) {
+            static::$imageWidth = $imageWidth;
+        }
+        if ($imageHeight > 0) {
+            static::$imageHeight = $imageHeight;
+        }
     }
 
     /**
@@ -157,7 +173,8 @@ class FaceDesigner extends Designer {
         // Check some items.
         $this->checkItemsRelation();
         // Create the base image.
-        $this->image = imagecreatetruecolor(self::IMAGE_WIDTH, self::IMAGE_HEIGHT);
+        $this->image = imagecreatetruecolor(
+            self::$imageWidth, self::$imageHeight);
         // Put items on the base image.
         $this->dropLayer(
             $this->bgFilled,
@@ -199,8 +216,8 @@ class FaceDesigner extends Designer {
         $fixSize = 180;
         $croppedImage = imagecreatetruecolor($fixSize, $fixSize);
         imagecopy($croppedImage, $this->image, 0,
-            self::IMAGE_HEIGHT - $fixSize, 0, 0,
-            self::IMAGE_WIDTH, self::IMAGE_HEIGHT);
+            self::$imageHeight - $fixSize, 0, 0,
+            self::$imageWidth, self::$imageHeight);
         $this->image = imagecreatetruecolor($size, $size);
         imagecopyresampled($this->image, $croppedImage, 0, 0, 0, 0,
             $size, $size, $fixSize, $fixSize);
