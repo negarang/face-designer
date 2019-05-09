@@ -41,4 +41,11 @@ class Weather extends EffectItem {
     public function __construct($id) {
         parent::__construct($id);
     }
+
+    /**
+     * @return string
+     */
+    static public function getDirectoryPattern() {
+        return self::removeDirectoryPlaceholder(self::PATH_PLACEHOLDER_COLOR);
+    }
 }
