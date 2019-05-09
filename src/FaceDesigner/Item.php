@@ -265,10 +265,6 @@ abstract class Item implements Layer {
         // Add name of the file and file extension.
         $path .= str_replace(self::PATH_PLACEHOLDER_FILE_NAME,
             $this->getFileName(), self::getFileNamePattern());
-        // Not Exists?
-        if (!file_exists($path)) {
-            $path = self::getDefaultImagePath();
-        }
 
         return $path;
     }
@@ -296,9 +292,11 @@ abstract class Item implements Layer {
         if (!empty($this->image)) {
             return;
         }
-        $fileName = $this->isVisible() ?
-            $this->getFilePath() : self::getDefaultImagePath();
-        $this->image = imagecreatefrompng($fileName);
+        // Item is visible and file exists in the storage.
+        $path = $this->isVisible() && file_exists($path = $this->getFilePath()) ?
+            $path : self::getDefaultImagePath();
+        // Convert file to image resource.
+        $this->image = imagecreatefrompng($path);
         // If there is an error.
         if ($this->image === false) {
             $this->image = null;
